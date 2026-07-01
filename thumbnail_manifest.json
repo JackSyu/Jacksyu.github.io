@@ -1,20 +1,58 @@
 {
-  "real_pdf_crops": [
-    "urtpm.jpg",
-    "kdformer.jpg",
-    "sdetr.jpg"
-  ],
-  "designed_thumbnails": [
-    "eam-vtg.jpg",
-    "navigscene.jpg",
-    "ppid-im.jpg",
-    "sdnet.jpg",
-    "vom-hst.jpg",
-    "spg-im.jpg",
-    "dts-vibe.jpg",
-    "vmfm.jpg",
-    "dmsr.jpg",
-    "watch2listen.jpg"
-  ],
-  "note": "Three ICASSP thumbnails are cropped from uploaded PDFs. Other thumbnails are generated themed graphics so the homepage has no empty cards; replace with real PDF crops later if desired."
+  "policy": "Publication thumbnails must come from official paper PDFs or official paper/conference pages. Generated illustrative graphics are not used.",
+  "thumbnails": {
+    "eam-vtg.jpg": {
+      "method": "official_conference_page_screenshot",
+      "source": "https://cmsworkshops.com/ICASSP2026/view_paper.php?PaperNum=16795",
+      "note": "Public PDF was not available from the conference page at update time."
+    },
+    "navigscene.jpg": {
+      "method": "pdf_first_page_crop",
+      "source": "https://arxiv.org/pdf/2507.05227"
+    },
+    "ppid-im.jpg": {
+      "method": "pdf_first_page_crop",
+      "source": "https://ojs.aaai.org/index.php/AAAI/article/download/28198/28393"
+    },
+    "sdnet.jpg": {
+      "method": "pdf_first_page_crop",
+      "source": "https://openaccess.thecvf.com/content/WACV2024/papers/Li_SDNet_An_Extremely_Efficient_Portrait_Matting_Model_via_Self-Distillation_WACV_2024_paper.pdf"
+    },
+    "kdformer.jpg": {
+      "method": "pdf_crop",
+      "source": "IEEE Xplore paper PDF"
+    },
+    "urtpm.jpg": {
+      "method": "pdf_crop",
+      "source": "IEEE Xplore paper PDF"
+    },
+    "vom-hst.jpg": {
+      "method": "pdf_first_page_crop",
+      "source": "https://openaccess.thecvf.com/content/WACV2023/papers/Wang_Video_Object_Matting_via_Hierarchical_Space-Time_Semantic_Guidance_WACV_2023_paper.pdf"
+    },
+    "spg-im.jpg": {
+      "method": "pdf_first_page_crop",
+      "source": "https://arxiv.org/pdf/2204.09276"
+    },
+    "sdetr.jpg": {
+      "method": "pdf_crop",
+      "source": "IEEE Xplore paper PDF"
+    },
+    "dts-vibe.jpg": {
+      "method": "official_paper_page_screenshot",
+      "source": "https://openaccess.thecvf.com/content/WACV2022/html/Li_Deep_Two-Stream_Video_Inference_for_Human_Body_Pose_and_Shape_WACV_2022_paper.html"
+    },
+    "vmfm.jpg": {
+      "method": "official_paper_page_screenshot",
+      "source": "https://openaccess.thecvf.com/content/ICCV2021/html/Xu_Virtual_Multi-Modality_Self-Supervised_Foreground_Matting_for_Human-Object_Interaction_ICCV_2021_paper.html"
+    },
+    "dmsr.jpg": {
+      "method": "pdf_first_page_crop",
+      "source": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Xu_Discriminative_Multi-Modality_Speech_Recognition_CVPR_2020_paper.pdf"
+    },
+    "watch2listen.jpg": {
+      "method": "pdf_first_page_crop",
+      "source": "https://openaccess.thecvf.com/content_WACV_2020/papers/Xu_Watch_to_Listen_Clearly_Visual_Speech_Enhancement_Driven_Multi-modality_Speech_WACV_2020_paper.pdf"
+    }
+  }
 }

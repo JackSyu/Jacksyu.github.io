@@ -369,7 +369,7 @@
       },
       {
         title: "Watch to Listen Clearly: Visual Speech Enhancement Driven Multi-Modality Speech Recognition",
-        link: "https://openaccess.thecvf.com/WACV2020",
+        link: "https://openaccess.thecvf.com/content_WACV_2020/html/Xu_Watch_to_Listen_Clearly_Visual_Speech_Enhancement_Driven_Multi-modality_Speech_WACV_2020_paper.html",
         image: "assets/papers/watch2listen.jpg",
         authors: "<b>Bo Xu</b>, Jacob Wang, Cheng Lu, Yandong Guo",
         venue: "WACV 2020",
@@ -382,11 +382,12 @@
 
     const pubGrid = document.getElementById('pubGrid');
     const buttons = document.querySelectorAll('.filter-btn');
+    const thumbnailVersion = '20260701-real-thumbnails';
     function render(filter = 'All') {
       const items = filter === 'All' ? publications : publications.filter(p => p.category === filter);
       pubGrid.innerHTML = items.sort((a,b)=>b.year-a.year).map(p => `
         <article class="pub-card">
-          <div class="thumb"><img src="${p.image}" alt="${p.title} thumbnail" loading="lazy"></div>
+          <div class="thumb"><img src="${p.image}?v=${thumbnailVersion}" alt="${p.title} thumbnail" loading="lazy"></div>
           <div class="pub-content">
             <div class="pub-meta"><span class="badge">${p.badge}</span><span class="year">${p.year}</span></div>
             <h3 class="pub-title"><a href="${p.link}" target="_blank" rel="noopener noreferrer">${p.title}</a></h3>
