@@ -1,0 +1,20 @@
+{
+  "real_pdf_crops": [
+    "urtpm.jpg",
+    "kdformer.jpg",
+    "sdetr.jpg"
+  ],
+  "designed_thumbnails": [
+    "eam-vtg.jpg",
+    "navigscene.jpg",
+    "ppid-im.jpg",
+    "sdnet.jpg",
+    "vom-hst.jpg",
+    "spg-im.jpg",
+    "dts-vibe.jpg",
+    "vmfm.jpg",
+    "dmsr.jpg",
+    "watch2listen.jpg"
+  ],
+  "note": "Three ICASSP thumbnails are cropped from uploaded PDFs. Other thumbnails are generated themed graphics so the homepage has no empty cards; replace with real PDF crops later if desired."
+}

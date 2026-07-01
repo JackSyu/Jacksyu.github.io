@@ -1,136 +1,431 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bo Xu | Personal Homepage</title>
+  <title>Bo Xu | Research Homepage</title>
+  <meta name="description" content="Bo Xu - research homepage for autonomous driving, multimodal learning, image/video matting, audio-visual speech recognition, and vision-language AI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <style>
+    :root {
+      --bg: #040817;
+      --bg2: #071327;
+      --panel: rgba(9, 20, 42, 0.74);
+      --panel-2: rgba(12, 26, 55, 0.72);
+      --border: rgba(109, 218, 255, 0.18);
+      --border-2: rgba(109, 218, 255, 0.34);
+      --text: #eaf5ff;
+      --muted: #9fb7d7;
+      --primary: #63d5ff;
+      --primary2: #7c8cff;
+      --accent: #47f0c3;
+      --pink: #ff63bd;
+      --shadow: 0 24px 70px rgba(0,0,0,.42);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      background: #f7f7f8;
-      color: #222;
-      line-height: 1.6;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 4%, rgba(99,213,255,.18), transparent 32%),
+        radial-gradient(circle at 84% 9%, rgba(124,140,255,.18), transparent 30%),
+        radial-gradient(circle at 50% 80%, rgba(71,240,195,.10), transparent 42%),
+        linear-gradient(180deg, #030614 0%, #071327 42%, #081a31 100%);
+      overflow-x: hidden;
     }
-
-    .container {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 60px 24px;
+    body::before {
+      content:"";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(99,213,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,213,255,.04) 1px, transparent 1px);
+      background-size: 34px 34px;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.6), rgba(0,0,0,.15));
     }
-
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    body::after {
+      content:"";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(255,255,255,.05), transparent 48%);
+      pointer-events: none;
+      z-index: 0;
     }
-
-    h1 {
-      font-size: 42px;
-      margin-bottom: 8px;
-    }
-
-    h2 {
-      margin-top: 36px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 8px;
-    }
-
-    .subtitle {
-      font-size: 20px;
-      color: #666;
-      margin-bottom: 28px;
-    }
-
-    a {
-      color: #0969da;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .tag {
-      display: inline-block;
-      background: #eef2ff;
-      color: #334155;
-      padding: 6px 10px;
-      border-radius: 999px;
-      margin: 4px 6px 4px 0;
-      font-size: 14px;
-    }
-
-    .project {
-      margin-bottom: 18px;
-    }
-
-    footer {
-      margin-top: 40px;
-      color: #888;
-      font-size: 14px;
-    }
+    a { color: inherit; text-decoration: none; }
+    code { color: #d9fbff; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); padding: 2px 6px; border-radius: 8px; }
+    .container { width: min(1240px, calc(100% - 32px)); margin: 0 auto; position: relative; z-index: 1; }
+    .nav { position: sticky; top: 0; z-index: 50; background: rgba(3, 7, 18, .66); border-bottom: 1px solid rgba(99,213,255,.13); backdrop-filter: blur(18px); }
+    .nav-inner { width: min(1240px, calc(100% - 32px)); margin: 0 auto; display:flex; align-items:center; justify-content:space-between; padding: 15px 0; gap: 18px; }
+    .brand { font-family: Orbitron, Inter, sans-serif; font-weight: 800; letter-spacing: 1.3px; color: #e8fbff; white-space: nowrap; }
+    .nav-links { display:flex; align-items:center; gap: 18px; flex-wrap: wrap; justify-content:flex-end; }
+    .nav-links a { color: var(--muted); font-size: 14px; transition:.22s; }
+    .nav-links a:hover { color: var(--primary); }
+    .glass { background: linear-gradient(180deg, rgba(11,24,50,.75), rgba(8,18,38,.70)); border: 1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(18px); border-radius: 26px; }
+    .hero { padding: 70px 0 28px; display:grid; grid-template-columns: 1.10fr .90fr; gap: 22px; align-items: stretch; }
+    .hero-card { padding: 38px; position: relative; overflow: hidden; }
+    .hero-card::after { content:""; position:absolute; width:320px; height:320px; right:-120px; top:-100px; background: radial-gradient(circle, rgba(99,213,255,.22), transparent 68%); border-radius:999px; pointer-events:none; }
+    .eyebrow { display:inline-flex; align-items:center; gap:10px; color: var(--primary); text-transform: uppercase; letter-spacing: 1.8px; font-size: 12px; padding: 8px 12px; border: 1px solid rgba(99,213,255,.22); border-radius: 999px; background: rgba(99,213,255,.06); margin-bottom: 18px; }
+    .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 18px rgba(71,240,195,.95); }
+    h1 { margin: 0 0 12px; font-size: clamp(44px, 7vw, 78px); line-height: 0.98; letter-spacing: -1.8px; }
+    .gradient-text { background: linear-gradient(135deg, #fff 0%, #84e7ff 46%, #9ca7ff 78%, #55f0c4 100%); -webkit-background-clip: text; background-clip:text; color: transparent; }
+    .headline { max-width: 760px; margin: 0 0 24px; color: #c7d8f4; font-size: 18px; line-height: 1.78; }
+    .hero-tags { display:flex; flex-wrap:wrap; gap: 10px; margin-bottom: 28px; }
+    .tag { padding: 9px 13px; border-radius:999px; border:1px solid rgba(99,213,255,.18); background: rgba(99,213,255,.08); color:#e7f8ff; font-size: 13px; }
+    .hero-actions { display:flex; gap: 12px; flex-wrap:wrap; }
+    .btn { display:inline-flex; align-items:center; gap: 8px; padding: 12px 18px; border-radius: 14px; font-weight: 700; border: 1px solid rgba(99,213,255,.22); transition:.24s; }
+    .btn-primary { background: linear-gradient(135deg, rgba(99,213,255,.22), rgba(124,140,255,.20)); }
+    .btn-secondary { color:#dbeeff; background: rgba(255,255,255,.04); }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(99,213,255,.48); box-shadow: 0 12px 28px rgba(99,213,255,.12); }
+    .hero-side { padding: 26px; display:flex; flex-direction:column; gap:16px; }
+    .stats { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .stat { padding: 17px 14px; background: rgba(255,255,255,.035); border: 1px solid rgba(99,213,255,.13); border-radius: 18px; text-align:center; }
+    .stat h3 { margin:0; font-size: 30px; letter-spacing: -.5px; }
+    .stat p { margin: 7px 0 0; color: var(--muted); font-size: 12.5px; line-height:1.35; }
+    .mini-card { padding: 18px; border-radius: 18px; background: rgba(255,255,255,.035); border: 1px solid rgba(99,213,255,.13); }
+    .mini-card h3 { margin: 0 0 8px; font-size: 16px; }
+    .mini-card p { margin:0; color: var(--muted); line-height:1.7; font-size: 14px; }
+    .section { padding: 22px 0; }
+    .section-header { display:flex; align-items:end; justify-content:space-between; gap:16px; margin-bottom: 20px; }
+    .section-title { margin:0; font-size: 30px; letter-spacing:-.6px; }
+    .section-subtitle { margin: 7px 0 0; color: var(--muted); font-size: 15px; line-height:1.65; }
+    .chart-panel { padding: 24px; display:grid; grid-template-columns: .92fr 1.08fr; gap: 22px; align-items:center; }
+    #radarChart { width:100%; height: 420px; }
+    .skill-list { display:grid; gap: 12px; }
+    .skill-row { display:grid; grid-template-columns: 180px 1fr 48px; gap: 12px; align-items:center; }
+    .skill-name { color:#dcecff; font-weight:700; font-size:14px; }
+    .bar { height: 10px; border-radius:999px; background: rgba(255,255,255,.08); overflow:hidden; }
+    .bar span { display:block; height:100%; border-radius:999px; background: linear-gradient(90deg, var(--primary), var(--primary2), var(--accent)); box-shadow: 0 0 24px rgba(99,213,255,.25); }
+    .skill-val { color: var(--muted); font-size: 13px; text-align:right; }
+    .toolbar { display:flex; gap: 10px; flex-wrap:wrap; margin-bottom:18px; }
+    .filter-btn { border:1px solid rgba(99,213,255,.14); color: var(--muted); background: rgba(255,255,255,.035); border-radius: 999px; padding: 9px 14px; cursor:pointer; transition:.22s; font-weight:600; }
+    .filter-btn.active, .filter-btn:hover { color:white; background: rgba(99,213,255,.13); border-color: rgba(99,213,255,.36); }
+    .pub-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .pub-card { position:relative; overflow:hidden; padding: 16px; border-radius: 24px; background: linear-gradient(180deg, rgba(10,22,47,.84), rgba(6,15,34,.82)); border: 1px solid rgba(99,213,255,.15); box-shadow: var(--shadow); display:grid; grid-template-columns: 180px 1fr; gap: 18px; transition:.25s; min-height: 258px; }
+    .pub-card::after { content:""; position:absolute; inset:0; background: radial-gradient(circle at 22% 0%, rgba(99,213,255,.12), transparent 36%); pointer-events:none; opacity:0; transition:.25s; }
+    .pub-card:hover { transform: translateY(-4px); border-color: var(--border-2); }
+    .pub-card:hover::after { opacity:1; }
+    .thumb { border-radius: 18px; overflow:hidden; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); min-height: 132px; align-self: stretch; position:relative; }
+    .thumb img { width:100%; height:100%; min-height: 132px; object-fit: cover; display:block; transition:.35s; }
+    .pub-card:hover .thumb img { transform: scale(1.045); filter: brightness(1.08) contrast(1.06); }
+    .pub-content { min-width: 0; display:flex; flex-direction:column; position:relative; z-index:2; }
+    .pub-meta { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom: 10px; }
+    .badge { padding: 6px 10px; border-radius:999px; background: rgba(99,213,255,.10); border: 1px solid rgba(99,213,255,.18); color:#dff8ff; font-size: 11px; font-weight:800; letter-spacing:.45px; }
+    .year { color: var(--muted); font-size: 13px; }
+    .pub-title { font-size: 19px; line-height:1.36; margin:0 0 9px; letter-spacing:-.25px; }
+    .pub-title a { transition:.2s; }
+    .pub-title a:hover { color: var(--primary); text-shadow: 0 0 18px rgba(99,213,255,.26); }
+    .authors { color:#b9cdeb; font-size: 13.2px; line-height:1.55; margin-bottom: 10px; }
+    .authors b { color: #fff; }
+    .venue { color: var(--accent); font-size: 13.5px; font-weight:800; margin-bottom: 10px; }
+    .desc { color: var(--muted); font-size: 13.4px; line-height:1.62; margin-bottom: 12px; }
+    .pub-links { margin-top:auto; display:flex; gap:10px; flex-wrap:wrap; }
+    .pub-link { padding: 8px 11px; font-size: 12.5px; border-radius: 12px; color:#e4f3ff; background: rgba(255,255,255,.045); border:1px solid rgba(99,213,255,.15); transition:.22s; }
+    .pub-link:hover { border-color: rgba(99,213,255,.45); color:#fff; }
+    .footer { margin: 42px 0 54px; padding: 24px; text-align:center; color: var(--muted); font-size: 14px; }
+    @media (max-width: 1020px) { .hero, .chart-panel { grid-template-columns: 1fr; } .pub-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 720px) { .nav-inner { align-items:flex-start; flex-direction:column; } .hero-card,.hero-side,.chart-panel{ padding:22px; } .stats { grid-template-columns: 1fr; } .pub-card { grid-template-columns:1fr; } .thumb { min-height: 190px; } .skill-row { grid-template-columns: 1fr; gap: 6px; } #radarChart { height: 340px; } }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <div class="card">
-      <h1>Bo Xu</h1>
-      <div class="subtitle">Research Engineer / Autonomous Driving / Embodied AI</div>
-
-      <p>
-        我关注自动驾驶、具身智能、多模态感知与生成式模型，长期兴趣包括
-        3D perception、occupancy prediction、planning-aware representation learning
-        和视觉动作验证。
-      </p>
-
-      <h2>Research Interests</h2>
-      <span class="tag">Autonomous Driving</span>
-      <span class="tag">Embodied AI</span>
-      <span class="tag">3D Perception</span>
-      <span class="tag">Occupancy</span>
-      <span class="tag">Multimodal Learning</span>
-      <span class="tag">Flow Matching</span>
-
-      <h2>Projects</h2>
-
-      <div class="project">
-        <strong>FlowOccSR</strong>
-        <p>
-          Task-aware BEV occupancy super-resolution framework for autonomous driving,
-          exploring low-resolution perception enhancement and planning safety benefits.
-        </p>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">BO XU / RESEARCH</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#publications">Publications</a>
+        <a href="https://scholar.google.com/citations?user=ELfOzcEAAAAJ&hl" target="_blank" rel="noopener">Scholar</a>
       </div>
-
-      <div class="project">
-        <strong>Action-Conditioned Occupancy Flow</strong>
-        <p>
-          A research direction for modeling action-conditioned future occupancy dynamics
-          under low-compute planning settings.
-        </p>
-      </div>
-
-      <div class="project">
-        <strong>Visual Action-Effect Verifier</strong>
-        <p>
-          A before-after video verification framework for language-conditioned action
-          success, failure, and counterfactual reasoning.
-        </p>
-      </div>
-
-      <h2>Links</h2>
-      <p>
-        <a href="https://github.com/你的用户名">GitHub</a> ·
-        <a href="https://scholar.google.com/">Google Scholar</a> ·
-        <a href="mailto:your_email@example.com">Email</a>
-      </p>
-
-      <footer>
-        © 2026 Bo Xu. Built with GitHub Pages.
-      </footer>
     </div>
-  </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero" id="about">
+      <div class="glass hero-card">
+        <div class="eyebrow"><span class="dot"></span> Research Engineer · Multimodal AI · Autonomous Driving</div>
+        <h1><span class="gradient-text">Bo Xu</span></h1>
+        <p class="headline">
+          Researcher and machine learning engineer working across autonomous driving intelligence,
+          multimodal perception, vision-language systems, image/video matting, audio-visual speech recognition,
+          and efficient dense prediction models.
+        </p>
+        <div class="hero-tags">
+          <span class="tag">Autonomous Driving</span><span class="tag">Vision-Language AI</span><span class="tag">Multimodal Learning</span>
+          <span class="tag">Image & Video Matting</span><span class="tag">Audio-Visual Speech</span><span class="tag">Efficient Dense Prediction</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://scholar.google.com/citations?user=ELfOzcEAAAAJ&hl" target="_blank" rel="noopener">Google Scholar</a>
+          <a class="btn btn-secondary" href="https://github.com/JackSyu" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn btn-secondary" href="mailto:xubocau@163.com">Email</a>
+        </div>
+      </div>
+      <div class="glass hero-side">
+        <div class="stats">
+          <div class="stat"><h3>13</h3><p>Selected accepted / published papers</p></div>
+          <div class="stat"><h3>2020-2026</h3><p>Publication timeline</p></div>
+          <div class="stat"><h3>6+</h3><p>Core research areas</p></div>
+        </div>
+        <div class="mini-card">
+          <h3>Current focus</h3>
+          <p>Driving intelligence, VLA-style reasoning, video/world-model verification, temporal grounding, and robust multimodal systems.</p>
+        </div>
+        <div class="mini-card">
+          <h3>Publication style</h3>
+          <p>Each paper card is linked to the paper page and includes a visual thumbnail, venue tag, author list, and short technical summary.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Research & Skill Distribution</h2>
+          <p class="section-subtitle">A visual snapshot of the research portfolio across driving, multimodal learning, dense prediction, and efficient deployment.</p>
+        </div>
+      </div>
+      <div class="glass chart-panel">
+        <div id="radarChart"></div>
+        <div class="skill-list">
+          <div class="skill-row"><div class="skill-name">Image / Video Matting</div><div class="bar"><span style="width:95%"></span></div><div class="skill-val">95</div></div>
+          <div class="skill-row"><div class="skill-name">Multimodal Learning</div><div class="bar"><span style="width:90%"></span></div><div class="skill-val">90</div></div>
+          <div class="skill-row"><div class="skill-name">Autonomous Driving</div><div class="bar"><span style="width:86%"></span></div><div class="skill-val">86</div></div>
+          <div class="skill-row"><div class="skill-name">Audio-Visual Speech</div><div class="bar"><span style="width:82%"></span></div><div class="skill-val">82</div></div>
+          <div class="skill-row"><div class="skill-name">Vision-Language AI</div><div class="bar"><span style="width:78%"></span></div><div class="skill-val">78</div></div>
+          <div class="skill-row"><div class="skill-name">3D / Human Vision</div><div class="bar"><span style="width:70%"></span></div><div class="skill-val">70</div></div>
+          <div class="skill-row"><div class="skill-name">Temporal Grounding</div><div class="bar"><span style="width:72%"></span></div><div class="skill-val">72</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="publications">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Selected Publications</h2>
+          <p class="section-subtitle">Accepted / published papers only. Earlier duplicate submissions, withdrawals, and CoRR duplicates are excluded.</p>
+        </div>
+      </div>
+      <div class="toolbar" id="filters">
+        <button class="filter-btn active" data-filter="All">All</button>
+        <button class="filter-btn" data-filter="Autonomous Driving">Autonomous Driving</button>
+        <button class="filter-btn" data-filter="Temporal Grounding">Temporal Grounding</button>
+        <button class="filter-btn" data-filter="Matting">Matting</button>
+        <button class="filter-btn" data-filter="Speech">Speech</button>
+        <button class="filter-btn" data-filter="Vision">Vision</button>
+      </div>
+      <div class="pub-grid" id="pubGrid"></div>
+    </section>
+
+    <footer class="glass footer">
+      © 2026 Bo Xu · Built with GitHub Pages · Designed as a modern sci-tech research homepage
+    </footer>
+  </main>
+
+  <script>
+    const publications = [
+      {
+        title: "Balancing Accuracy and Diversity: Evolving Anchor Matching for Video Temporal Grounding",
+        link: "https://cmsworkshops.com/ICASSP2026/view_paper.php?PaperNum=16795",
+        image: "assets/papers/eam-vtg.jpg",
+        authors: "Xiaolong Sun, <b>Bo Xu</b>, Ziyi Liu, Cheng Lu",
+        venue: "ICASSP 2026",
+        year: 2026,
+        category: "Temporal Grounding",
+        badge: "VIDEO TEMPORAL GROUNDING",
+        desc: "A matching strategy for video temporal grounding that balances localization accuracy and prediction diversity through evolving anchors."
+      },
+      {
+        title: "NavigScene: Bridging Local Perception and Global Navigation for Beyond-Visual-Range Autonomous Driving",
+        link: "https://arxiv.org/abs/2507.05227",
+        image: "assets/papers/navigscene.jpg",
+        authors: "Qucheng Peng, Chen Bai, Guoxiang Zhang, <b>Bo Xu</b>, Xiaotong Liu, Xiaoyin Zheng, Chen Chen, Cheng Lu",
+        venue: "ACM Multimedia 2025",
+        year: 2025,
+        category: "Autonomous Driving",
+        badge: "AUTONOMOUS DRIVING",
+        desc: "Bridges local visual perception and global navigation context for beyond-visual-range autonomous driving intelligence."
+      },
+      {
+        title: "Privileged Prior Information Distillation for Image Matting",
+        link: "https://ojs.aaai.org/index.php/AAAI/article/view/28198",
+        image: "assets/papers/ppid-im.jpg",
+        authors: "Cheng Lyu, Jiake Xie, <b>Bo Xu</b>, Cheng Lu, Han Huang, Xin Huang, Ming Wu, Chuang Zhang, Yong Tang",
+        venue: "AAAI 2024",
+        year: 2024,
+        category: "Matting",
+        badge: "IMAGE MATTING",
+        desc: "Transfers privileged prior information to improve trimap-free image matting on challenging foreground structures."
+      },
+      {
+        title: "SDNet: An Extremely Efficient Portrait Matting Model via Self-Distillation",
+        link: "https://openaccess.thecvf.com/content/WACV2024/html/Li_SDNet_An_Extremely_Efficient_Portrait_Matting_Model_via_Self-Distillation_WACV_2024_paper.html",
+        image: "assets/papers/sdnet.jpg",
+        authors: "Ziwen Li, <b>Bo Xu</b>, Jiake Xie, Yong Tang, Cheng Lu",
+        venue: "WACV 2024",
+        year: 2024,
+        category: "Matting",
+        badge: "IMAGE MATTING",
+        desc: "An efficient portrait matting model emphasizing high-quality alpha prediction under limited compute budgets."
+      },
+      {
+        title: "KD-Former: Transformer Knowledge Distillation for Image Matting",
+        link: "https://ieeexplore.ieee.org/document/10447955/",
+        image: "assets/papers/kdformer.jpg",
+        authors: "Ziwen Li, <b>Bo Xu</b>, Cheng Lu",
+        venue: "ICASSP 2024",
+        year: 2024,
+        category: "Matting",
+        badge: "IMAGE MATTING",
+        desc: "A transformer-specific knowledge distillation framework for lightweight yet accurate image matting."
+      },
+      {
+        title: "Ultra Real-Time Portrait Matting via Parallel Semantic Guidance",
+        link: "https://ieeexplore.ieee.org/document/10097034/",
+        image: "assets/papers/urtpm.jpg",
+        authors: "Xin Huang, Jiake Xie, <b>Bo Xu</b>, Han Huang, Ziwen Li, Cheng Lu, Yandong Guo, Yong Tang",
+        venue: "ICASSP 2023",
+        year: 2023,
+        category: "Matting",
+        badge: "IMAGE MATTING",
+        desc: "An ultra-light portrait matting framework with parallel semantic guidance for real-time low-power deployment."
+      },
+      {
+        title: "Video Object Matting via Hierarchical Space-Time Semantic Guidance",
+        link: "https://openaccess.thecvf.com/content/WACV2023/html/Wang_Video_Object_Matting_via_Hierarchical_Space-Time_Semantic_Guidance_WACV_2023_paper.html",
+        image: "assets/papers/vom-hst.jpg",
+        authors: "Yumeng Wang, <b>Bo Xu</b>, Ziwen Li, Han Huang, Cheng Lu, Yandong Guo",
+        venue: "WACV 2023",
+        year: 2023,
+        category: "Matting",
+        badge: "VIDEO MATTING",
+        desc: "Introduces hierarchical space-time semantic guidance for temporally robust video object matting."
+      },
+      {
+        title: "Situational Perception Guided Image Matting",
+        link: "https://dl.acm.org/doi/10.1145/3503161.3548036",
+        image: "assets/papers/spg-im.jpg",
+        authors: "<b>Bo Xu</b>, Jiake Xie, Han Huang, Ziwen Li, Cheng Lu, Yong Tang, Yandong Guo",
+        venue: "ACM Multimedia 2022",
+        year: 2022,
+        category: "Matting",
+        badge: "IMAGE MATTING",
+        desc: "Mitigates annotation subjectivity and improves image matting through situational perception guidance."
+      },
+      {
+        title: "SDETR: Attention-Guided Salient Object Detection with Transformer",
+        link: "https://ieeexplore.ieee.org/document/9746367/",
+        image: "assets/papers/sdetr.jpg",
+        authors: "Guanze Liu, <b>Bo Xu</b>, Han Huang, Cheng Lu, Yandong Guo",
+        venue: "ICASSP 2022",
+        year: 2022,
+        category: "Vision",
+        badge: "SALIENT OBJECT DETECTION",
+        desc: "A two-stage predict-refine transformer framework for salient object detection with improved boundary details."
+      },
+      {
+        title: "Deep Two-Stream Video Inference for Human Body Pose and Shape Estimation",
+        link: "https://openaccess.thecvf.com/content/WACV2022/html/Li_Deep_Two-Stream_Video_Inference_for_Human_Body_Pose_and_Shape_WACV_2022_paper.html",
+        image: "assets/papers/dts-vibe.jpg",
+        authors: "Ziwen Li, <b>Bo Xu</b>, Han Huang, Cheng Lu, Yandong Guo",
+        venue: "WACV 2022",
+        year: 2022,
+        category: "Vision",
+        badge: "3D HUMAN UNDERSTANDING",
+        desc: "A two-stream video inference framework for stable human body pose and shape estimation from RGB videos."
+      },
+      {
+        title: "Virtual Multi-Modality Self-Supervised Foreground Matting for Human-Object Interaction",
+        link: "https://openaccess.thecvf.com/content/ICCV2021/html/Xu_Virtual_Multi-Modality_Self-Supervised_Foreground_Matting_for_Human-Object_Interaction_ICCV_2021_paper.html",
+        image: "assets/papers/vmfm.jpg",
+        authors: "<b>Bo Xu</b>, Han Huang, Cheng Lu, Ziwen Li, Yandong Guo",
+        venue: "ICCV 2021",
+        year: 2021,
+        category: "Matting",
+        badge: "FOREGROUND MATTING",
+        desc: "Uses virtual multi-modality and self-supervised learning for human-object interaction foreground matting."
+      },
+      {
+        title: "Discriminative Multi-Modality Speech Recognition",
+        link: "https://openaccess.thecvf.com/content_CVPR_2020/html/Xu_Discriminative_Multi-Modality_Speech_Recognition_CVPR_2020_paper.html",
+        image: "assets/papers/dmsr.jpg",
+        authors: "<b>Bo Xu</b>, Cheng Lu, Yandong Guo, Jacob Wang",
+        venue: "CVPR 2020",
+        year: 2020,
+        category: "Speech",
+        badge: "AUDIO-VISUAL SPEECH",
+        desc: "A discriminative audio-visual framework for robust multi-modality speech recognition under noisy conditions."
+      },
+      {
+        title: "Watch to Listen Clearly: Visual Speech Enhancement Driven Multi-Modality Speech Recognition",
+        link: "https://openaccess.thecvf.com/WACV2020",
+        image: "assets/papers/watch2listen.jpg",
+        authors: "<b>Bo Xu</b>, Jacob Wang, Cheng Lu, Yandong Guo",
+        venue: "WACV 2020",
+        year: 2020,
+        category: "Speech",
+        badge: "AUDIO-VISUAL SPEECH",
+        desc: "Uses visual speech enhancement to improve multimodal speech recognition in noisy acoustic environments."
+      }
+    ];
+
+    const pubGrid = document.getElementById('pubGrid');
+    const buttons = document.querySelectorAll('.filter-btn');
+    function render(filter = 'All') {
+      const items = filter === 'All' ? publications : publications.filter(p => p.category === filter);
+      pubGrid.innerHTML = items.sort((a,b)=>b.year-a.year).map(p => `
+        <article class="pub-card">
+          <div class="thumb"><img src="${p.image}" alt="${p.title} thumbnail" loading="lazy"></div>
+          <div class="pub-content">
+            <div class="pub-meta"><span class="badge">${p.badge}</span><span class="year">${p.year}</span></div>
+            <h3 class="pub-title"><a href="${p.link}" target="_blank" rel="noopener noreferrer">${p.title}</a></h3>
+            <div class="authors">${p.authors}</div>
+            <div class="venue">${p.venue}</div>
+            <div class="desc">${p.desc}</div>
+            <div class="pub-links"><a class="pub-link" href="${p.link}" target="_blank" rel="noopener noreferrer">Open Paper</a></div>
+          </div>
+        </article>
+      `).join('');
+    }
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render(btn.dataset.filter);
+    }));
+    render();
+
+    const chartEl = document.getElementById('radarChart');
+    if (window.echarts && chartEl) {
+      const radarChart = echarts.init(chartEl);
+      radarChart.setOption({
+        backgroundColor: 'transparent',
+        tooltip: { trigger: 'item' },
+        radar: {
+          radius: '67%', splitNumber: 5,
+          axisName: { color: '#dff3ff', fontSize: 13 },
+          splitArea: { areaStyle: { color: ['rgba(99,213,255,.035)','rgba(124,140,255,.035)'] } },
+          splitLine: { lineStyle: { color: 'rgba(99,213,255,.16)' } },
+          axisLine: { lineStyle: { color: 'rgba(99,213,255,.18)' } },
+          indicator: [
+            { name: 'Autonomous Driving', max: 100 }, { name: 'Image / Video Matting', max: 100 },
+            { name: 'Multimodal Learning', max: 100 }, { name: 'Audio-Visual Speech', max: 100 },
+            { name: 'Vision-Language AI', max: 100 }, { name: '3D / Human Vision', max: 100 },
+            { name: 'Temporal Grounding', max: 100 }
+          ]
+        },
+        series: [{ type: 'radar', data: [{ value: [86,95,90,82,78,70,72], name: 'Bo Xu',
+          lineStyle: { width: 2, color: '#63d5ff' }, areaStyle: { color: 'rgba(99,213,255,.24)' },
+          itemStyle: { color: '#63d5ff' }, symbolSize: 6
+        }]}]
+      });
+      window.addEventListener('resize', () => radarChart.resize());
+    }
+  </script>
 </body>
 </html>
